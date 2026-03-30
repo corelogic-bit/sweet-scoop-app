@@ -1,0 +1,6 @@
+[
+  {"customerName": "Alice Johnson", "flavorName": "Vanilla Dream", "review": "The ice cream was delicious and very creamy!", "rating": 5},
+  {"customerName": "Michael Chen", "flavorName": "Chocolate Heaven", "review": "Rich chocolate flavor and the texture was perfectly smooth.", "rating": 4},
+  {"customerName": "Sofia Martinez", "flavorName": "Strawberry Bliss", "review": "Fresh and fruity with just the right amount of sweetness.", "rating": 5},
+  {"customerName": "James Wilson", "flavorName": "Mint Magic", "review": "Love the refreshing mint taste with chocolate chips!", "rating": 4}
+]
