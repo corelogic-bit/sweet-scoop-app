@@ -2,7 +2,6 @@ import React, {useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
-import LoginForm from "./LoginForm";
 import DisplayStatus from "./DisplayStatus";
 
 
@@ -21,7 +20,7 @@ function SignupPage() {
     function validate() {
         const usernamePattern = /^[A-Za-z][A-Za-z0-9_-]{2,19}$/;
 
-        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const emailPattern = /^[^\s@]+@[^\s@]+\.(com|net|io)$/i;
 
         const hasUpper = /[A-Z]/.test(password);
 

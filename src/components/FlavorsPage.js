@@ -151,7 +151,7 @@ function FlavorsPage() {
     }
 
     return (
-        <div>
+    <div className="flavors-page">
             <Header />
             <div className="content">
 

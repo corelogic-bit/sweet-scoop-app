@@ -1,8 +1,7 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import {Link, useNavigate} from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
-
 import DisplayStatus from "./DisplayStatus";
 
 function LoginPage() {
@@ -10,13 +9,22 @@ function LoginPage() {
     const [password, setPassword] = useState("");
     const [statusType, setStatusType] = useState("");
     const [message, setMessage] = useState("");
+    const [loginSuccess, setLoginSuccess] = useState(false);
     const navigate = useNavigate();
 
+    useEffect(() => {
+        if (loginSuccess) {
+            const timer = setTimeout(() => {
+                navigate("/flavors");
+            }, 2000);
+            return () => clearTimeout(timer);
+        }
+    }, [loginSuccess, navigate]);
 
     async function handleSubmit(e) {
         e.preventDefault();
         setMessage("");
-        try{
+        try {
             const response = await fetch("http://localhost:5000/login", {
                 method: "POST",
                 headers: {
@@ -24,15 +32,13 @@ function LoginPage() {
                 },
                 body: JSON.stringify({username, password})
             });
-            const data = await response.json(); 
+            const data = await response.json();
             if (data.success) {
                 localStorage.setItem("userId", data.userId);
                 localStorage.setItem("username", username);
                 setStatusType("success");
                 setMessage(data.message);
-                setTimeout(() => {
-                    navigate("/flavors");
-                }, 700);
+                setLoginSuccess(true);
             } else {
                 setStatusType("error");
                 setMessage(data.message);
@@ -40,13 +46,12 @@ function LoginPage() {
         } catch (error) {
             setStatusType("error");
             setMessage("An error occurred while logging in.");
-            
         }
     }
 
     function handleForgotPassword() {
         setStatusType("error");
-        
+        setMessage("Forgot password feature is not available.");
     }
 
     return (
@@ -100,6 +105,3 @@ function LoginPage() {
 }
 
 export default LoginPage;
-
-
-

@@ -108,7 +108,10 @@ def get_reviews():
 
 @app.route("/cart", methods=["GET"])
 def get_cart():
-    user_id = int(request.args.get("userId"))
+    try:
+        user_id = int(request.args.get("userId"))
+    except (TypeError, ValueError):
+        return jsonify({"success": False, "message": "Invalid or missing userId."})
     user = next((u for u in users if u["id"] == user_id), None)
     if not user:
         return jsonify({"success": False, "message": "User not found."})
@@ -197,7 +200,10 @@ def place_order():
 
 @app.route("/orders", methods=["GET"])
 def get_orders():
-    user_id = int(request.args.get("userId"))
+    try:
+        user_id = int(request.args.get("userId"))
+    except (TypeError, ValueError):
+        return jsonify({"success": False, "message": "Invalid or missing userId."})
     user = next((u for u in users if u["id"] == user_id), None)
     if not user:
         return jsonify({"success": False, "message": "User not found."})
